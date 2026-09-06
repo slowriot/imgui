@@ -4,6 +4,7 @@
 //
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
+//  2026-09-06: Emscripten: Added ImGui_ImplEmscripten_GetCssToImGuiScale() helper.
 //  2026-09-05: Emscripten: Use the canvas framebuffer dimensions for display sizing and exact per-axis mouse coordinate scaling.
 //  2026-09-04: Emscripten: Replaced TargetDevicePixelRatio global with an Init() parameter and runtime setter.
 //  2026-09-03: Updated coding style and simplified key translation table setup.
@@ -400,6 +401,13 @@ void ImGui_ImplEmscripten_SetTargetDevicePixelRatio(float target_device_pixel_ra
 
     bd->TargetDevicePixelRatio = target_device_pixel_ratio;
     ImGui_ImplEmscripten_UpdateDisplayProperties(ImGui::GetIO(), bd);
+}
+
+ImVec2 ImGui_ImplEmscripten_GetCssToImGuiScale()
+{
+    ImGui_ImplEmscripten_Data* bd = ImGui_ImplEmscripten_GetBackendData();
+    IM_ASSERT(bd != nullptr && "Context or backend not initialized? Did you call ImGui_ImplEmscripten_Init()?");
+    return bd != nullptr ? bd->CssToImGuiScale : ImVec2(1.0f, 1.0f);
 }
 
 void ImGui_ImplEmscripten_Shutdown()
