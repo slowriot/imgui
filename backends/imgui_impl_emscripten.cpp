@@ -4,6 +4,7 @@
 //
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
+//  2026-09-06: Inputs: Exposed mouse button and key translation functions as public.
 //  2026-09-06: DPI: Added ImGui_ImplEmscripten_GetCssToImGuiScale() getter.
 //  2026-09-05: DPI: Use the canvas framebuffer dimensions for display sizing and exact per-axis mouse coordinate scaling.
 //  2026-09-04: Replaced TargetDevicePixelRatio global with an Init() parameter and runtime setter.
@@ -27,11 +28,6 @@
 #include <emscripten/html5.h>
 
 extern ImGuiID ImHashStr(char const* data, size_t data_size = 0, ImGuiID seed = 0); // Declared in imgui_internal.h.
-
-// W3C UI Events KeyboardEvent.code translation helpers
-
-static ImGuiKey ImGui_ImplEmscripten_TranslateKey(char const* emscripten_key);
-static constexpr ImGuiMouseButton ImGui_ImplEmscripten_TranslateMouseButton(unsigned short emscripten_button) __attribute__((__const__));
 
 // Browser cursor helpers, adapted from https://github.com/Armchair-Software/emscripten-browser-cursor
 
@@ -606,7 +602,7 @@ static void ImGui_ImplEmscripten_SetBrowserCursor(char const* new_cursor)
     }, new_cursor);
 }
 
-static constexpr ImGuiMouseButton ImGui_ImplEmscripten_TranslateMouseButton(unsigned short emscripten_button)
+ImGuiMouseButton ImGui_ImplEmscripten_TranslateMouseButton(unsigned short emscripten_button)
 {
     // Translate an emscripten-provided integer describing a mouse button to an imgui mouse button
     if (emscripten_button == 1) return ImGuiMouseButton_Middle;                 // 1 = middle mouse button
@@ -841,7 +837,7 @@ static ImGuiStorage const& ImGui_ImplEmscripten_GetKeyTranslationStorage()
     return storage;
 }
 
-static ImGuiKey ImGui_ImplEmscripten_TranslateKey(char const* emscripten_key)
+ImGuiKey ImGui_ImplEmscripten_TranslateKey(const char* emscripten_key)
 {
     // Translate a W3C KeyboardEvent.code string into an ImGuiKey.
     if (emscripten_key == nullptr || emscripten_key[0] == '\0') return ImGuiKey_None;
