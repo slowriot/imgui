@@ -50,6 +50,9 @@ IMGUI_IMPL_API void ImGui_ImplEmscripten_SetTargetDevicePixelRatio(float target_
 // Return the scale used to convert browser CSS pixel coordinates to Dear ImGui coordinates. Valid after Init().
 IMGUI_IMPL_API ImVec2 ImGui_ImplEmscripten_GetCssToImGuiScale();
 
+// Refresh display size and scaling properties immediately. Call after changing the canvas framebuffer or CSS size.
+IMGUI_IMPL_API void ImGui_ImplEmscripten_UpdateDisplayProperties();
+
 // Input translation helpers.
 IMGUI_IMPL_API ImGuiMouseButton ImGui_ImplEmscripten_TranslateMouseButton(unsigned short emscripten_button);
 IMGUI_IMPL_API ImGuiKey         ImGui_ImplEmscripten_TranslateKey(const char* emscripten_key);

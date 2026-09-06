@@ -4,6 +4,7 @@
 //
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
+//  2026-09-06: DPI: Added public ImGui_ImplEmscripten_UpdateDisplayProperties() wrapper.
 //  2026-09-06: Inputs: Exposed mouse button and key translation functions as public.
 //  2026-09-06: DPI: Added ImGui_ImplEmscripten_GetCssToImGuiScale() getter.
 //  2026-09-05: DPI: Use the canvas framebuffer dimensions for display sizing and exact per-axis mouse coordinate scaling.
@@ -404,6 +405,13 @@ ImVec2 ImGui_ImplEmscripten_GetCssToImGuiScale()
     ImGui_ImplEmscripten_Data* bd = ImGui_ImplEmscripten_GetBackendData();
     IM_ASSERT(bd != nullptr && "Context or backend not initialized? Did you call ImGui_ImplEmscripten_Init()?");
     return bd != nullptr ? bd->CssToImGuiScale : ImVec2(1.0f, 1.0f);
+}
+
+void ImGui_ImplEmscripten_UpdateDisplayProperties()
+{
+    ImGui_ImplEmscripten_Data* bd = ImGui_ImplEmscripten_GetBackendData();
+    IM_ASSERT(bd != nullptr && "Context or backend not initialized? Did you call ImGui_ImplEmscripten_Init()?");
+    if (bd != nullptr) ImGui_ImplEmscripten_UpdateDisplayProperties(ImGui::GetIO(), bd);
 }
 
 void ImGui_ImplEmscripten_Shutdown()
