@@ -4,19 +4,19 @@
 //
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
-//  2026-09-06: Emscripten: Added ImGui_ImplEmscripten_GetCssToImGuiScale() helper.
-//  2026-09-05: Emscripten: Use the canvas framebuffer dimensions for display sizing and exact per-axis mouse coordinate scaling.
-//  2026-09-04: Emscripten: Replaced TargetDevicePixelRatio global with an Init() parameter and runtime setter.
+//  2026-09-06: DPI: Added ImGui_ImplEmscripten_GetCssToImGuiScale() getter.
+//  2026-09-05: DPI: Use the canvas framebuffer dimensions for display sizing and exact per-axis mouse coordinate scaling.
+//  2026-09-04: Replaced TargetDevicePixelRatio global with an Init() parameter and runtime setter.
 //  2026-09-03: Updated coding style and simplified key translation table setup.
 //  2026-04-02: Inputs: Replaced custom KeyboardEvent.code parser with ImHashStr()/ImGuiStorage lookup to match Dear ImGui backend style.
-//  2026-03-31: Emscripten: Added configurable TargetDevicePixelRatio to control how browser device pixels map to Dear ImGui pixels.
+//  2026-03-31: Added configurable TargetDevicePixelRatio to control how browser device pixels map to Dear ImGui pixels.
 //  2026-03-31: Inputs: Added BrowserBack/Forward and F13-F24 key mappings.
-//  2026-03-31: Emscripten: Moved cursor state into backend userdata and replaced cursor restore storage with owned C strings.
+//  2026-03-31: Moved cursor state into backend userdata and replaced cursor restore storage with owned C strings.
 //  2024-12-09: Inputs: Added special handling for modifier keys to also generate modifier key events.
 //  2024-12-08: Inputs: Prevent "Delete" key from getting printed in text input.
 //  2024-12-06: Inputs: Added special handling for Tab and Enter event capture.
 //  2024-12-06: Inputs: Handle blur and focus events correctly, focusin and focusout aren't enough.
-//  2024-12-06: Emscripten: Don't rely on devicePixelRatio for WebGPU framebuffer sizing; CSS->ImGui scaling may still use it.
+//  2024-12-06: Don't rely on devicePixelRatio for WebGPU framebuffer sizing; CSS->ImGui scaling may still use it.
 //  2024-11-22: Initial version by Eugene Hopkinson. (#8178)
 
 #include "imgui.h"
